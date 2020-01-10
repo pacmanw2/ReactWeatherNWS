@@ -5,9 +5,10 @@ class Card extends React.Component {
     constructor() {
         super()
         this.state = {
-            'city': 'None',
-            'state': 'None',
-            'lastUpdated': 'N/A'
+            'city': 'none',
+            'state': 'none',
+            'lastUpdated': 'none',
+            'forecast': 'none'
         }
         this.noaaEndpoint = 'https://api.weather.gov/points/'
     }
@@ -35,6 +36,10 @@ class Card extends React.Component {
         )
     }
 
+    /**
+     * Get the forecast from NWS
+     * @param {String} url 
+     */
     getForecast(url) {
         fetch(url).then(
             (response) => {
@@ -43,8 +48,9 @@ class Card extends React.Component {
         ).then(
             (jsonObj) => {
                 let updated = jsonObj.properties.updated
-                this.setState({ lastUpdated: updated })
-                console.log(updated)
+                let forecastPeriods = jsonObj.properties.periods
+                this.setState({ lastUpdated: updated, forecast: forecastPeriods })
+                console.log(forecastPeriods)
             }
         )
     }
@@ -55,7 +61,7 @@ class Card extends React.Component {
             <div>
                 <h1>{this.state['city']}</h1>
                 <h1>{this.state['state']}</h1>
-                <h1>{this.state.lastUpdated}</h1>
+                <h1>{this.state.forecast[0]['temperature']}</h1>
             </div>
         );
     }
