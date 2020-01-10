@@ -17,6 +17,10 @@ class Card extends React.Component {
         this.getLocationName()
     }
 
+    /**
+     * Get the City/State of the location.
+     * Current location is hard coded to Vernon, California.
+     */
     getLocationName() {
         let coord = '34.052235,-118.243683'
         this.noaaEndpoint += coord
