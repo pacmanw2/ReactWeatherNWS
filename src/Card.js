@@ -5,10 +5,13 @@ class Card extends React.Component {
     constructor() {
         super()
         this.state = {
-            'city': 'none',
-            'state': 'none',
-            'lastUpdated': 'none',
-            'forecast': 'none'
+            'city': null,
+            'state': null,
+            'lastUpdated': null,
+            'forecast': null,
+            'forecastHourly': null,
+            'temp': null,
+            'detailedForecast': null
         }
         this.noaaEndpoint = 'https://api.weather.gov/points/'
     }
@@ -16,6 +19,8 @@ class Card extends React.Component {
     componentDidMount() {
         this.getLocationName()
     }
+
+
 
     /**
      * Get the City/State of the location.
@@ -33,7 +38,12 @@ class Card extends React.Component {
             (jsonObj) => {
                 let city = jsonObj['properties']['relativeLocation']['properties']['city']
                 let state = jsonObj['properties']['relativeLocation']['properties']['state']
-                this.setState({ city: city, state: state })
+                this.setState(
+                    {
+                        city: city,
+                        state: state
+                    }
+                )
                 console.log(jsonObj)
                 this.getForecast(jsonObj.properties.forecast)
             }
@@ -53,19 +63,25 @@ class Card extends React.Component {
             (jsonObj) => {
                 let updated = jsonObj.properties.updated
                 let forecastPeriods = jsonObj.properties.periods
-                this.setState({ lastUpdated: updated, forecast: forecastPeriods })
-                console.log(forecastPeriods)
+                let temp = jsonObj.properties.periods[0].temperature
+                let detailedForecast = jsonObj.properties.periods[0].detailedForecast
+                this.setState({
+                    lastUpdated: updated, forecast: forecastPeriods, temp: temp,
+                    detailedForecast: detailedForecast
+                })
+                // console.log(forecastPeriods)
             }
         )
     }
 
     render() {
-        //this.getForecast()
+        console.log(this.state.forecast)
+        const styles = { backgroundColor: '#fff1a6' }
         return (
-            <div>
-                <h1>{this.state['city']}</h1>
-                <h1>{this.state['state']}</h1>
-                <h1>{this.state.forecast[0]['temperature']}</h1>
+            <div className="item" style={styles}>
+                <h1 className="main-temp">{this.state.temp}&#8457;</h1>
+                <h2>{this.state.city}, {this.state.state}</h2>
+                <h3>{this.state.detailedForecast}</h3>
             </div>
         );
     }

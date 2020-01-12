@@ -15,10 +15,17 @@ class App extends React.Component {
   render() {
     return (
       <div className="App" >
-        <Card />
+
+        <div class="container">
+          <Card />
+          <div class="item">Someting else</div>
+          <div class="item">three</div>
+
+        </div>
       </div>
     );
   }
+
 }
 
 export default App;
