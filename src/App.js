@@ -18,8 +18,8 @@ class App extends React.Component {
 
         <div class="container">
           <Card />
-          <div class="item">Someting else</div>
-          <div class="item">three</div>
+          <div class="item">Next 24 hours forecast</div>
+          <div class="item">Forecast Periods</div>
 
         </div>
       </div>

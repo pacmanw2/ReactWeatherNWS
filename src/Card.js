@@ -61,7 +61,7 @@ class Card extends React.Component {
             }
         ).then(
             (jsonObj) => {
-                let updated = jsonObj.properties.updated
+                let updated = new Date(jsonObj.properties.updated).toString()
                 let forecastPeriods = jsonObj.properties.periods
                 let temp = jsonObj.properties.periods[0].temperature
                 let detailedForecast = jsonObj.properties.periods[0].detailedForecast
@@ -82,6 +82,7 @@ class Card extends React.Component {
                 <h1 className="main-temp">{this.state.temp}&#8457;</h1>
                 <h2>{this.state.city}, {this.state.state}</h2>
                 <h3>{this.state.detailedForecast}</h3>
+                <h6>Last Update: {this.state.lastUpdated}</h6>
             </div>
         );
     }
