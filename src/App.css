@@ -36,3 +36,140 @@
     transform: rotate(360deg);
   }
 }
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  vertical-align: baseline;
+}
+
+.item h1, .item h2, .item h3 {
+  margin: 0;
+  text-align: center;
+}
+
+.item {
+  display: flex;
+  width: 49%;
+  min-height: 400px;
+  flex-wrap: wrap;
+  margin-bottom: 1%;
+  justify-content: center;
+  align-items: center;
+}
+
+.item:nth-child(3n-2) {
+  width: 100%;
+}
+
+.main-temp {
+  margin: 0;
+  font-size: 5em;
+  align-items: center;
+}
+
+.main-location {
+  margin: 0;
+  font-size: 2em;
+}
+
+.main-detailed {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.main-updated {
+  margin-top: 2em;
+  font-size: 1em;
+}
+
+.forecast-item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #ffffff;
+  padding: 20px;
+  transition: all 0.2s;
+  width: auto;
+  background-color: #00FF9F
+  /* background-color: #F3872F; */
+}
+
+.forecast-item:hover {
+  background-color: #00E58F;
+  cursor: pointer;
+}
+
+.forecast-item h6 {
+  color: #888;
+  margin-top: 5px;
+}
+
+.forecast {
+  text-align: right;
+}
+
+.weather-forecast {
+  width: 49%;
+}
+
+/* .flex-item {
+  background: green;
+  padding: 5px;
+  width: 200px;
+  height: 150px;
+  margin-top: 10px;
+  
+  line-height: 150px;
+  color: white;
+  font-weight: bold;
+  font-size: 3em;
+  text-align: center;
+  display: inline-block;
+}
+
+.scrolling-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.card {
+  display: inline-block;
+} */
+
+/* .container {
+  display: flex;
+}
+
+.item {
+  flex-grow: 1;
+  height: 100px;
+}
+
+.item + .item {
+  margin-left: 2%;
+} */
+
+.tabs {
+  /**
+   * Setting display to flex makes this container lay
+   * out its children using flexbox, the exact same
+   * as in the above "Stepper input" example.
+   */
+  display: flex;
+
+  border-bottom: 1px solid #D7DBDD;
+}
+
+  .tab {
+    cursor: pointer;
+    padding: 5px 30px;
+    color: #16A2D7;
+    font-size: 12px;
+    border-bottom: 2px solid transparent;
+  }
+
+  .tab.is-tab-selected {
+    border-bottom-color: #4EBBE4;
+  }
