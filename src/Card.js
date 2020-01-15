@@ -1,5 +1,5 @@
 import React from 'react';
-import './noaaApi.js'
+
 
 class Card extends React.Component {
     constructor() {
@@ -11,7 +11,8 @@ class Card extends React.Component {
             'forecast': null,
             'forecastHourly': null,
             'temp': null,
-            'detailedForecast': null
+            'detailedForecast': null,
+            'forecast24hr': null
         }
         this.noaaEndpoint = 'https://api.weather.gov/points/'
     }
@@ -46,6 +47,9 @@ class Card extends React.Component {
                 )
                 console.log(jsonObj)
                 this.getForecast(jsonObj.properties.forecast)
+                let hourlyForecastEndpoint = jsonObj.properties.forecastHourly
+                console.log(hourlyForecastEndpoint)
+                //this.getHourlyForecast(hourlyForecastEndpoint)
             }
         )
     }
@@ -65,24 +69,31 @@ class Card extends React.Component {
                 let forecastPeriods = jsonObj.properties.periods
                 let temp = jsonObj.properties.periods[0].temperature
                 let detailedForecast = jsonObj.properties.periods[0].detailedForecast
+
                 this.setState({
-                    lastUpdated: updated, forecast: forecastPeriods, temp: temp,
+                    lastUpdated: updated,
+                    forecast: forecastPeriods,
+                    temp: temp,
                     detailedForecast: detailedForecast
                 })
                 // console.log(forecastPeriods)
+
             }
         )
     }
 
     render() {
-        console.log(this.state.forecast)
+        //console.log(this.state.forecast)
         const styles = { backgroundColor: '#fff1a6' }
         return (
             <div className="item" style={styles}>
-                <h1 className="main-temp">{this.state.temp}&#8457;</h1>
-                <h2>{this.state.city}, {this.state.state}</h2>
-                <h3>{this.state.detailedForecast}</h3>
-                <h6>Last Update: {this.state.lastUpdated}</h6>
+                <div className="item-temp">
+                    <h1 className="main-temp">{this.state.temp}&#8457;</h1>
+                    <h2 className="main-location">{this.state.city}, {this.state.state}</h2>
+                    <h2 className="main-detailed">{this.state.detailedForecast}</h2>
+                    <p className="main-updated">Last Update: {this.state.lastUpdated}</p>
+                </div>
+
             </div>
         );
     }
