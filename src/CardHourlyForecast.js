@@ -1,4 +1,5 @@
 import React from 'react';
+import CardHourlyChild from './CardHourlyChild.js';
 
 /*
 TODO: break down the forecast-item into components,
@@ -13,7 +14,8 @@ class CardHourlyForecast extends React.Component {
             'forecast12hr': null
         }
         this.noaaEndpoint = 'https://api.weather.gov/points/'
-        this.coord = '34.052235,-118.243683'
+        // this.coord = '34.052235,-118.243683'
+        this.coord = '47.658779,-117.426048'
     }
 
     componentDidMount() {
@@ -52,39 +54,25 @@ class CardHourlyForecast extends React.Component {
     render() {
         console.log(this.state.forecast12hr)
         return (
-
-            <div className="weather-forecast">
-                <div className="forecast-item">
-                    <div class="day">
-                        <h4>12 PM</h4>
-                        <h6>Aug 7</h6>
-                    </div>
-                    <div class="forecast">
-                        <i class="wi wi-night-sleet"></i> 70&#8457;
-                    <h6>Partly Cloudy</h6>
-                    </div>
-                    {/* <div className="scrolling-wrapper">
-                    <div className="flex-item">1</div>
-                    <div className="flex-item">2</div>
-                    <div className="flex-item">3</div>
-                    <div className="flex-item">4</div>
-                    <div className="flex-item">5</div>
-                    <div className="flex-item">6</div>
-                </div> */}
-                </div>
-
-                <div class="forecast-item">
-                    <div class="day">
-                        <h4>1PM</h4>
-                        <h6>Aug 7</h6>
-                    </div>
-                    <div class="forecast">
-                        <i class="wi wi-night-sleet"></i> 72&#8457;
-                    <h6>Sunny</h6>
-                    </div>
-                </div>
+            <div class="flex-container">
+                <CardHourlyChild />
+                <CardHourlyChild />
+                <CardHourlyChild />
+                <CardHourlyChild />
+                <CardHourlyChild />
+                <CardHourlyChild />
+                <CardHourlyChild />
+                <CardHourlyChild />
+                <CardHourlyChild />
+                <CardHourlyChild />
+                <CardHourlyChild />
+                <CardHourlyChild />
+                <CardHourlyChild />
+                <CardHourlyChild />
+                <CardHourlyChild />
+                <CardHourlyChild />
+                <CardHourlyChild />
             </div>
-
         )
     }
 }

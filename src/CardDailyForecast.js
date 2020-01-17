@@ -1,4 +1,5 @@
 import React from 'react';
+import './CardHourlyForecast.css'
 
 /*
 TODO: break down the forecast-item into components,
@@ -15,7 +16,7 @@ class CardDailyForecast extends React.Component {
             'forecast12hr': null
         }
         this.noaaEndpoint = 'https://api.weather.gov/points/'
-        this.coord = '34.052235,-118.243683'
+        this.coord = '47.658779,-117.426048'
     }
 
     componentDidMount() {
@@ -44,6 +45,7 @@ class CardDailyForecast extends React.Component {
             (response) => { return response.json() }
         ).then(
             (jsonObj) => {
+                console.log(jsonObj)
                 let hourlyForecast = jsonObj.properties.periods
                 let forecast12hr = hourlyForecast.slice(0, 12)
                 this.setState({ forecast12hr: forecast12hr, forecastHourlyAll: hourlyForecast })
@@ -54,11 +56,10 @@ class CardDailyForecast extends React.Component {
     render() {
         console.log(this.state.forecast12hr)
         return (
-
             <div className="weather-forecast">
                 <div className="forecast-item">
                     <div class="day">
-                        <h4>Friday</h4>
+                        <h4>12 PM</h4>
                         <h6>Aug 7</h6>
                     </div>
                     <div class="forecast">
@@ -77,7 +78,7 @@ class CardDailyForecast extends React.Component {
 
                 <div class="forecast-item">
                     <div class="day">
-                        <h4>Saturday</h4>
+                        <h4>1PM</h4>
                         <h6>Aug 7</h6>
                     </div>
                     <div class="forecast">
@@ -86,7 +87,6 @@ class CardDailyForecast extends React.Component {
                     </div>
                 </div>
             </div>
-
         )
     }
 }

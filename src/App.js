@@ -27,11 +27,12 @@ class App extends React.Component {
     return (
       <div className="App" >
         {/* <Tab /> */}
-        <div class="container">
+        <div class="banner">
           <Card />
-          <CardHourlyForecast />
-          <CardDailyForecast />
+          {/* <CardHourlyForecast />
+          <CardDailyForecast /> */}
         </div>
+        <CardHourlyForecast />
       </div>
     );
   }

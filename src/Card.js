@@ -28,7 +28,8 @@ class Card extends React.Component {
      * Current location is hard coded to Vernon, California.
      */
     getLocationName() {
-        let coord = '34.052235,-118.243683'
+        // let coord = '34.052235,-118.243683'
+        let coord = '47.658779,-117.426048'
         this.noaaEndpoint += coord
 
         fetch(this.noaaEndpoint).then(
@@ -84,12 +85,13 @@ class Card extends React.Component {
 
     render() {
         //console.log(this.state.forecast)
-        const styles = { backgroundColor: '#fff1a6' }
+        // const styles = { backgroundColor: '#fff1a6' }
         return (
-            <div className="item" style={styles}>
+            <div className="item">
                 <div className="item-temp">
-                    <h1 className="main-temp">{this.state.temp}&#8457;</h1>
                     <h2 className="main-location">{this.state.city}, {this.state.state}</h2>
+                    <p className="main-temp">{this.state.temp}&#8457;</p>
+
                     <h2 className="main-detailed">{this.state.detailedForecast}</h2>
                     <p className="main-updated">Last Update: {this.state.lastUpdated}</p>
                 </div>
