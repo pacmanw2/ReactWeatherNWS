@@ -29,10 +29,10 @@ class App extends React.Component {
         {/* <Tab /> */}
         <div className="banner">
           <Card />
-          {/* <CardHourlyForecast />
-          <CardDailyForecast /> */}
+
         </div>
         <CardHourlyForecast />
+        <CardDailyForecast />
       </div>
     );
   }
