@@ -1,19 +1,14 @@
 import React from 'react';
 
-class CardHourlyChild extends React.Component {
-    constructor() {
-        super()
-        this.state = {}
-    }
-
-    render() {
-        return (
-            <div>
-                88 F
-                <div>4pm</div>
-            </div>
-        )
-    }
+function CardHourlyChild(props) {
+    const fontSize = { fontSize: 14 }
+    return (
+        <div>
+            <h1>{props.temp}</h1>
+            <h1 style={fontSize}>{props.shortForecast}</h1>
+            <h1 style={fontSize}>{props.time}</h1>
+        </div>
+    )
 }
 
 export default CardHourlyChild
