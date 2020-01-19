@@ -27,7 +27,7 @@ class App extends React.Component {
     return (
       <div className="App" >
         {/* <Tab /> */}
-        <div class="banner">
+        <div className="banner">
           <Card />
           {/* <CardHourlyForecast />
           <CardDailyForecast /> */}

@@ -11,7 +11,8 @@ class CardHourlyForecast extends React.Component {
         super()
         this.state = {
             'forecastHourlyAll': null,
-            'forecast12hr': null
+            'forecast12hr': null,
+            'hourlyForecast': null
         }
         this.noaaEndpoint = 'https://api.weather.gov/points/'
         // this.coord = '34.052235,-118.243683'
@@ -47,14 +48,45 @@ class CardHourlyForecast extends React.Component {
                 let hourlyForecast = jsonObj.properties.periods
                 let forecast12hr = hourlyForecast.slice(0, 12)
                 this.setState({ forecast12hr: forecast12hr, forecastHourlyAll: hourlyForecast })
+                console.log('12 hour forecast')
+                console.log(this.state.forecast12hr)
+                //let time = this.get12hrTime();
+                const hourlyChildren = this.state.forecast12hr.map(
+                    element => {
+                        let time = this.get12hrTime(element.startTime)
+                        return <CardHourlyChild
+                            key={element.number}
+                            time={time}
+                            temp={element.temperature}
+                            shortForecast={element.shortForecast}
+                        />
+                    }
+                )
+
+                console.log(hourlyChildren)
+                this.setState({ hourlyForecast: hourlyChildren })
             }
         )
     }
 
+    get12hrTime(time) {
+        let timeHour = new Date(time).getHours();
+        if (12 <= timeHour) {
+            timeHour = timeHour % 12;
+            timeHour = timeHour.toString() + ' PM';
+        }
+        else {
+            if (0 === timeHour) { timeHour = 12 }
+            timeHour = timeHour.toString() + ' AM';
+        }
+        // console.log(timeHour);
+        return timeHour;
+    }
+
     render() {
-        console.log(this.state.forecast12hr)
         return (
             <div class="flex-container">
+                {/* <CardHourlyChild />
                 <CardHourlyChild />
                 <CardHourlyChild />
                 <CardHourlyChild />
@@ -70,8 +102,8 @@ class CardHourlyForecast extends React.Component {
                 <CardHourlyChild />
                 <CardHourlyChild />
                 <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
+                <CardHourlyChild /> */}
+                {this.state.hourlyForecast}
             </div>
         )
     }
