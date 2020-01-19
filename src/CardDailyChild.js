@@ -6,13 +6,12 @@ function CardDailyChild(props) {
     let isDay = props.isDayTime
 
     if (isDay) {
-        styles = { backgroundColor: '#546bab', color: 'white' }
-        forecastStyle = { color: '#ffff00' }
-
-    } else {
         styles = { backgroundColor: '#00FF9F' }
         forecastStyle = { color: '#888' }
 
+    } else {
+        styles = { backgroundColor: '#546bab', color: 'white' }
+        forecastStyle = { color: '#ffff00' }
     }
 
     return (

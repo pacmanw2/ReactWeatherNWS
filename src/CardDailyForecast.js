@@ -1,5 +1,6 @@
 import React from 'react';
 import CardDailyChild from './CardDailyChild.js'
+import { get12hrTime } from './weatherUtils.js'
 
 /*
 TODO: break down the forecast-item into components,
@@ -50,7 +51,7 @@ class CardDailyForecast extends React.Component {
                 console.log(forecastPeriods)
                 const forecastCards = forecastPeriods.map(
                     element => {
-                        let time = this.get12hrTime(element.startTime)
+                        let time = get12hrTime(element.startTime)
                         let dateObj = new Date(element.startTime)
                         let day = dateObj.getDate()
                         let monthName = dateObj.toLocaleString('default', { month: 'short' })
@@ -72,24 +73,33 @@ class CardDailyForecast extends React.Component {
         )
     }
 
-    /**
-     * With the given datetime string, convert to Date object 
-     * to get the hours (24hr format). From the 24 hour format, convert
-     * to 12 hour format.
-     * @param {String} time 
-     */
-    get12hrTime(time) {
-        let timeHour = new Date(time).getHours();
-        if (12 <= timeHour) {
-            timeHour = timeHour % 12;
-            timeHour = timeHour.toString() + ' PM';
-        }
-        else {
-            if (0 === timeHour) { timeHour = 12 }
-            timeHour = timeHour.toString() + ' AM';
-        }
-        return timeHour;
-    }
+    // /**
+    //  * With the given datetime string, convert to Date object 
+    //  * to get the hours (24hr format). From the 24 hour format, convert
+    //  * to 12 hour format.
+    //  * @param {String} time 
+    //  */
+    // get12hrTime(time) {
+    //     let timeHour = new Date(time).getHours();
+    //     console.log(timeHour)
+    //     if (12 <= timeHour) {
+    //         timeHour = timeHour % 12;
+    //         if (0 === timeHour) {
+    //             console.log('time is 0')
+    //             timeHour = 12;
+    //         }
+    //         timeHour = timeHour.toString() + ' PM';
+    //         console.log(timeHour)
+    //     }
+    //     else {
+    //         if (0 === timeHour) {
+    //             timeHour = 12
+    //         }
+    //         timeHour = timeHour.toString() + ' AM';
+    //     }
+    //     console.log(timeHour)
+    //     return timeHour;
+    // }
 
     render() {
         return (
