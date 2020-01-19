@@ -1,11 +1,6 @@
 import React from 'react';
 import CardHourlyChild from './CardHourlyChild.js';
 
-/*
-TODO: break down the forecast-item into components,
-so that each day is a component itself.
-*/
-
 class CardHourlyForecast extends React.Component {
     constructor() {
         super()
@@ -69,6 +64,12 @@ class CardHourlyForecast extends React.Component {
         )
     }
 
+    /**
+     * With the given datetime string, convert to Date object 
+     * to get the hours (24hr format). From the 24 hour format, convert
+     * to 12 hour format.
+     * @param {String} time 
+     */
     get12hrTime(time) {
         let timeHour = new Date(time).getHours();
         if (12 <= timeHour) {
@@ -79,30 +80,12 @@ class CardHourlyForecast extends React.Component {
             if (0 === timeHour) { timeHour = 12 }
             timeHour = timeHour.toString() + ' AM';
         }
-        // console.log(timeHour);
         return timeHour;
     }
 
     render() {
         return (
             <div class="flex-container">
-                {/* <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild /> */}
                 {this.state.hourlyForecast}
             </div>
         )
