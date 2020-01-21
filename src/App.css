@@ -72,6 +72,16 @@
   width: 100%;
 } */
 
+.weather-alert-container {
+  display: flex;
+  justify-content: flex-start;
+  background-color: #fff1a6;
+}
+
+.weather-alert {
+  align-items: flex-end;
+}
+
 .main-temp {
   margin: 0;
   font-size: 5em;
