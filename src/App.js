@@ -7,6 +7,7 @@ import Tab from './Tab.js'
 import './CardHourlyForecast.css';
 import './CardDailyForecast.js';
 import CardDailyForecast from './CardDailyForecast';
+import WeatherAlert from './WeatherAlert'
 
 
 
@@ -26,13 +27,14 @@ class App extends React.Component {
 
     return (
       <div className="App" >
-        {/* <Tab /> */}
-        <div className="banner">
+        {/* <div className="banner">
           <Card />
-
-        </div>
+        </div> */}
+        <WeatherAlert />
+        <Card />
         <CardHourlyForecast />
         <CardDailyForecast />
+
       </div>
     );
   }
