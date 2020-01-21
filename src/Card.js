@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 class Card extends React.Component {
     constructor() {
         super()
@@ -87,15 +86,16 @@ class Card extends React.Component {
         //console.log(this.state.forecast)
         // const styles = { backgroundColor: '#fff1a6' }
         return (
-            <div className="item">
-                <div className="item-temp">
-                    <h2 className="main-location">{this.state.city}, {this.state.state}</h2>
-                    <p className="main-temp">{this.state.temp}&#8457;</p>
+            <div className="banner">
+                <div className="item">
+                    <div className="item-temp">
+                        <h2 className="main-location">{this.state.city}, {this.state.state}</h2>
+                        <p className="main-temp">{this.state.temp}&#8457;</p>
 
-                    <h2 className="main-detailed">{this.state.detailedForecast}</h2>
-                    <p className="main-updated">Last Update: {this.state.lastUpdated}</p>
+                        <h2 className="main-detailed">{this.state.detailedForecast}</h2>
+                        <p className="main-updated">Last Update: {this.state.lastUpdated}</p>
+                    </div>
                 </div>
-
             </div>
         );
     }

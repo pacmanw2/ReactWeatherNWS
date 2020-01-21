@@ -1,10 +1,7 @@
 import React from 'react';
+import Chart from "chart.js"
 import CardHourlyChild from './CardHourlyChild.js';
-
-/*
-TODO: break down the forecast-item into components,
-so that each day is a component itself.
-*/
+import { get12hrTime } from './weatherUtils.js'
 
 class CardHourlyForecast extends React.Component {
     constructor() {
@@ -53,7 +50,8 @@ class CardHourlyForecast extends React.Component {
                 //let time = this.get12hrTime();
                 const hourlyChildren = this.state.forecast12hr.map(
                     element => {
-                        let time = this.get12hrTime(element.startTime)
+                        let time = get12hrTime(element.startTime)
+                        console.log("the time is " + time)
                         return <CardHourlyChild
                             key={element.number}
                             time={time}
@@ -69,40 +67,9 @@ class CardHourlyForecast extends React.Component {
         )
     }
 
-    get12hrTime(time) {
-        let timeHour = new Date(time).getHours();
-        if (12 <= timeHour) {
-            timeHour = timeHour % 12;
-            timeHour = timeHour.toString() + ' PM';
-        }
-        else {
-            if (0 === timeHour) { timeHour = 12 }
-            timeHour = timeHour.toString() + ' AM';
-        }
-        // console.log(timeHour);
-        return timeHour;
-    }
-
     render() {
         return (
             <div class="flex-container">
-                {/* <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild />
-                <CardHourlyChild /> */}
                 {this.state.hourlyForecast}
             </div>
         )

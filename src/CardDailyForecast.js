@@ -1,5 +1,6 @@
 import React from 'react';
-import './CardHourlyForecast.css'
+import CardDailyChild from './CardDailyChild.js'
+import { get12hrTime } from './weatherUtils.js'
 
 /*
 TODO: break down the forecast-item into components,
@@ -12,80 +13,98 @@ class CardDailyForecast extends React.Component {
     constructor() {
         super()
         this.state = {
-            'forecastHourlyAll': null,
-            'forecast12hr': null
+            'forecast': null
         }
         this.noaaEndpoint = 'https://api.weather.gov/points/'
         this.coord = '47.658779,-117.426048'
     }
 
     componentDidMount() {
-        this.getForecast()
+        this.getCoordinateData()
     }
 
     /**
      * Get the forecast for the current coordinates
      */
-    getForecast() {
+    getCoordinateData() {
         let url = this.noaaEndpoint + this.coord
         console.log(url)
         fetch(url).then(
             (response) => { return response.json() }
         ).then(
             (jsonObj) => {
-                // get the endpoint to the hourly forecast
-                let hourlyEndpoint = jsonObj.properties.forecastHourly
-                this.getHourlyForecast(hourlyEndpoint)
+                // get the endpoint to the forecast
+                let forecast = jsonObj.properties.forecast
+                console.log('forecast')
+                console.log(forecast)
+                this.getForecast(forecast)
             }
         )
     }
 
-    getHourlyForecast(url) {
+    getForecast(url) {
         fetch(url).then(
             (response) => { return response.json() }
         ).then(
             (jsonObj) => {
-                console.log(jsonObj)
-                let hourlyForecast = jsonObj.properties.periods
-                let forecast12hr = hourlyForecast.slice(0, 12)
-                this.setState({ forecast12hr: forecast12hr, forecastHourlyAll: hourlyForecast })
+                let forecastPeriods = jsonObj.properties.periods
+                console.log(forecastPeriods)
+                const forecastCards = forecastPeriods.map(
+                    element => {
+                        let time = get12hrTime(element.startTime)
+                        let dateObj = new Date(element.startTime)
+                        let day = dateObj.getDate()
+                        let monthName = dateObj.toLocaleString('default', { month: 'short' })
+
+                        return <CardDailyChild
+                            key={element.number}
+                            time={time}
+                            date={monthName + ' ' + day}
+                            temp={element.temperature}
+                            shortForecast={element.shortForecast}
+                            isDayTime={element.isDaytime}
+                        />
+                    }
+                )
+
+                console.log(forecastCards)
+                this.setState({ forecast: forecastCards })
             }
         )
     }
 
+    // /**
+    //  * With the given datetime string, convert to Date object 
+    //  * to get the hours (24hr format). From the 24 hour format, convert
+    //  * to 12 hour format.
+    //  * @param {String} time 
+    //  */
+    // get12hrTime(time) {
+    //     let timeHour = new Date(time).getHours();
+    //     console.log(timeHour)
+    //     if (12 <= timeHour) {
+    //         timeHour = timeHour % 12;
+    //         if (0 === timeHour) {
+    //             console.log('time is 0')
+    //             timeHour = 12;
+    //         }
+    //         timeHour = timeHour.toString() + ' PM';
+    //         console.log(timeHour)
+    //     }
+    //     else {
+    //         if (0 === timeHour) {
+    //             timeHour = 12
+    //         }
+    //         timeHour = timeHour.toString() + ' AM';
+    //     }
+    //     console.log(timeHour)
+    //     return timeHour;
+    // }
+
     render() {
-        console.log(this.state.forecast12hr)
         return (
             <div className="weather-forecast">
-                <div className="forecast-item">
-                    <div class="day">
-                        <h4>12 PM</h4>
-                        <h6>Aug 7</h6>
-                    </div>
-                    <div class="forecast">
-                        <i class="wi wi-night-sleet"></i> 70&#8457;
-                    <h6>Partly Cloudy</h6>
-                    </div>
-                    {/* <div className="scrolling-wrapper">
-                    <div className="flex-item">1</div>
-                    <div className="flex-item">2</div>
-                    <div className="flex-item">3</div>
-                    <div className="flex-item">4</div>
-                    <div className="flex-item">5</div>
-                    <div className="flex-item">6</div>
-                </div> */}
-                </div>
-
-                <div class="forecast-item">
-                    <div class="day">
-                        <h4>1PM</h4>
-                        <h6>Aug 7</h6>
-                    </div>
-                    <div class="forecast">
-                        <i class="wi wi-night-sleet"></i> 72&#8457;
-                    <h6>Sunny</h6>
-                    </div>
-                </div>
+                {this.state.forecast}
             </div>
         )
     }

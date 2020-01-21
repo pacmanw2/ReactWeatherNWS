@@ -72,6 +72,16 @@
   width: 100%;
 } */
 
+.weather-alert-container {
+  display: flex;
+  justify-content: flex-start;
+  background-color: #fff1a6;
+}
+
+.weather-alert {
+  align-items: flex-end;
+}
+
 .main-temp {
   margin: 0;
   font-size: 5em;
@@ -99,8 +109,9 @@
   border-bottom: 2px solid #ffffff;
   padding: 20px;
   transition: all 0.2s;
-  width: auto;
-  background-color: #00FF9F
+  /* width: auto; */
+  /* background-color: #00FF9F */
+
   /* background-color: #F3872F; */
 }
 
@@ -119,53 +130,20 @@
 }
 
 .weather-forecast {
-  width: 49%;
+  /* width: 50%; */
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.weather-forecast > div {
+  flex: 0 50%;
 }
 
 @media only screen and (max-width: 600px) {
-  .body {
+    .body {
     flex-flow: column;
   }
 }
-
-
-/* .flex-item {
-  background: green;
-  padding: 5px;
-  width: 200px;
-  height: 150px;
-  margin-top: 10px;
-  
-  line-height: 150px;
-  color: white;
-  font-weight: bold;
-  font-size: 3em;
-  text-align: center;
-  display: inline-block;
-}
-
-.scrolling-wrapper {
-  overflow-x: scroll;
-  overflow-y: hidden;
-  white-space: nowrap;
-}
-
-.card {
-  display: inline-block;
-} */
-
-/* .container {
-  display: flex;
-}
-
-.item {
-  flex-grow: 1;
-  height: 100px;
-}
-
-.item + .item {
-  margin-left: 2%;
-} */
 
 .tabs {
   /**
