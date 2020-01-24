@@ -22,7 +22,7 @@ function CardDailyChild(props) {
                 <h6 style={forecastStyle}>{props.date}</h6>
             </div>
             <div className="forecast">
-                <i class="wi wi-night-sleet"></i> {props.temp}&#8457;
+                <i className="wi wi-night-sleet"></i> {props.temp}&#8457;
                     <h6 style={forecastStyle}>{props.shortForecast}</h6>
             </div>
             {/* </div> */}
