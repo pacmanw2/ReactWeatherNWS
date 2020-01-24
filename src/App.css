@@ -82,6 +82,37 @@
   align-items: flex-end;
 }
 
+.modal-header {
+  width: 96%;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 1.75em;
+  color: white;
+  background-color: red;
+}
+
+.modal-section {
+  text-align: center;
+  font-weight: bold;
+}
+
+.alert-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+
+.alert-modal > div {
+  background-color: #f1f1f1;
+  width: 96%;
+  margin: 1%;
+  text-align: center;
+  /* line-height: 75px; */
+  font-size: 25px;
+}
+
 .main-temp {
   margin: 0;
   font-size: 5em;
@@ -142,6 +173,33 @@
 @media only screen and (max-width: 600px) {
     .body {
     flex-flow: column;
+  }
+
+  .modal-header {
+    width: 100%;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 1.5em;
+    color: white;
+    background-color: red;
+  }
+
+  .alert-modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+  }
+  
+  .alert-modal > div {
+    background-color: #f1f1f1;
+    width: 100%;
+    margin: 1%;
+    text-align: center;
+    /* line-height: 22px; */
+    /* font-size: 16px; */
+    font-size: 1em;
   }
 }
 

@@ -69,7 +69,7 @@ class CardHourlyForecast extends React.Component {
 
     render() {
         return (
-            <div class="flex-container">
+            <div className="flex-container">
                 {this.state.hourlyForecast}
             </div>
         )
