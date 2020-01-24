@@ -6,7 +6,6 @@
  */
 export function get12hrTime(time) {
     let timeHour = new Date(time).getHours();
-    console.log(timeHour)
     if (12 <= timeHour) {
         timeHour = timeHour % 12;
         if (0 === timeHour) {
@@ -14,7 +13,6 @@ export function get12hrTime(time) {
             timeHour = 12;
         }
         timeHour = timeHour.toString() + ' PM';
-        console.log(timeHour)
     }
     else {
         if (0 === timeHour) {
@@ -22,7 +20,6 @@ export function get12hrTime(time) {
         }
         timeHour = timeHour.toString() + ' AM';
     }
-    console.log(timeHour)
     return timeHour;
 }
 
