@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactModal from 'react-modal';
+import responseObject from './response'
 
 class WeatherAlert extends React.Component {
     constructor() {
@@ -10,7 +11,10 @@ class WeatherAlert extends React.Component {
             event: 'N/A',
             description: 'N/A',
             headline: 'N/A',
-            instruction: 'N/A'
+            instruction: 'N/A',
+            severity: 'N/A',
+            descriptionTab: 'descriptionTab',
+            instructionTab: 'instructionTab'
         }
 
         this.handleOpenModal = this.handleOpenModal.bind(this)
@@ -22,7 +26,8 @@ class WeatherAlert extends React.Component {
 
     componentDidMount() {
         ReactModal.setAppElement('#alertContainer');
-        this.getAlert();
+        // this.getAlert();
+        this.getAlertMock();
     }
 
     handleOpenModal() {
@@ -60,38 +65,80 @@ class WeatherAlert extends React.Component {
         )
     }
 
+    getAlertMock() {
+        let properties = responseObject.features[0].properties
+        let nwsHeadline = properties.parameters.NWSheadline
+        let event = properties.event
+        let headline = properties.headline
+        let description = properties.description
+        let instruction = properties.instruction
+        let severity = properties.severity
+
+        this.setState({
+            nwsHeadline: nwsHeadline[0],
+            event: event,
+            description: description,
+            headline: headline,
+            instruction: instruction,
+            severity: severity
+        })
+    }
+
+    openTab(tabId) {
+        if (this.state.descriptionTab === tabId) {
+            console.log('opening: ' + tabId)
+            let tabClicked = document.getElementById(this.state.descriptionTab);
+            tabClicked.style.display = "block"
+
+            // TODO: Something like this, but to the tabs
+            // tabClicked.style.backgroundColor = "orange"
+
+            let tabToHide = document.getElementById(this.state.instructionTab);
+            tabToHide.style.display = "none"
+        } else if (this.state.instructionTab === tabId) {
+            console.log('opening: ' + tabId)
+            let tabClicked = document.getElementById(this.state.instructionTab);
+            tabClicked.style.display = "block"
+
+            let tabToHide = document.getElementById(this.state.descriptionTab);
+            tabToHide.style.display = "none"
+
+        }
+    }
+
 
     render() {
         return (
             <div className="weather-alert-container" id='alertContainer'>
                 <div className="weather-alert">
-                    <button className="button is-rounded is-warning" onClick={this.handleOpenModal}>
-                        View Alert(s)
+                    <button className="button is-danger is-hovered" onClick={this.handleOpenModal}>
+                        <i className="fas fa-exclamation-triangle"></i>
                     </button>
                     <ReactModal
                         isOpen={this.state.showModal}
                         contentLabel="Minimal Modal Example"
+                        style={{ "content": { "bottom": 'auto' } }}
                     >
                         <div className="w3-bar w3-border w3-black w3-center">
-                            <button className="w3-bar-item w3-button" style={{ "width": "50%" }} onclick="openCity('London')">Description</button>
-                            <button className="w3-bar-item w3-button" style={{ "width": "50%" }} onclick="openCity('Paris')">Instruction</button>
+                            <button className="w3-bar-item w3-button" style={{ "width": "50%" }} onClick={() => this.openTab(this.state.descriptionTab)}>Description</button>
+                            <button className="w3-bar-item w3-button" style={{ "width": "50%" }} onClick={() => this.openTab(this.state.instructionTab)}>Instruction</button>
                         </div>
 
-                        <div id="London">
+                        <div id={this.state.descriptionTab}>
                             <h2 style={{ "textAlign": "center" }}>{this.state.event}</h2>
                             <p style={{ "textAlign": "center" }}>
                                 {this.state.description}
                             </p>
                         </div>
 
-                        <div id="Paris" className="w3-container city" style={this.styles}>
-                            <h2>Paris</h2>
-                            <p>Paris is the capital of France.</p>
+                        <div id={this.state.instructionTab} style={{ "display": "none" }}>
+                            <h2 style={{ "textAlign": "center" }}>Severity: {this.state.severity}</h2>
+                            <p style={{ "textAlign": "center" }}>{this.state.instruction}</p>
                         </div>
 
                         <div style={{ "display": "flex", "justifyContent": "center" }}>
                             <button
-                                className="button is-warning is-rounded"
+                                className="button is-primary is-rounded"
                                 onClick={this.handleCloseModal}>
                                 Close
                             </button>
