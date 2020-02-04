@@ -45,13 +45,13 @@ class CardHourlyForecast extends React.Component {
                 let hourlyForecast = jsonObj.properties.periods
                 let forecast12hr = hourlyForecast.slice(0, 12)
                 this.setState({ forecast12hr: forecast12hr, forecastHourlyAll: hourlyForecast })
-                console.log('12 hour forecast')
-                console.log(this.state.forecast12hr)
+                //console.log('12 hour forecast')
+                //console.log(this.state.forecast12hr)
                 //let time = this.get12hrTime();
                 const hourlyChildren = this.state.forecast12hr.map(
                     element => {
                         let time = get12hrTime(element.startTime)
-                        console.log("the time is " + time)
+                        //console.log("the time is " + time)
                         return <CardHourlyChild
                             key={element.number}
                             time={time}
