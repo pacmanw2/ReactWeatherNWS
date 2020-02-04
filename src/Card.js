@@ -11,32 +11,77 @@ class Card extends React.Component {
             'forecastHourly': null,
             'temp': null,
             'detailedForecast': null,
-            'forecast24hr': null
+            'forecast24hr': null,
+            'latitude': '47.6588',
+            'longitude': '-117.426'
         }
         this.noaaEndpoint = 'https://api.weather.gov/points/'
+        this.setPosition = this.setPosition.bind(this);
     }
 
     componentDidMount() {
-        this.getLocationName()
+        this.getLocation();
+        //this.getLocationName();
     }
 
+    getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(this.setPosition, this.showError);
+          this.getLocationName();
+        } else {
+          console.log("Geolocation is not supported by this browser.");
+        }
+      }
+      
+    /**
+     * Set the latitude and longitude.
+     * It should be noted that React's setState is Async.
+     * Hence the callback function inside of the setState function.
+     * More details here: https://reactjs.org/docs/state-and-lifecycle.html
+     * @param {*} position 
+     */
+    setPosition(position) {
+        this.setState(
+            {
+                latitude: position.coords.latitude.toString(),
+                longitude: position.coords.longitude.toString()
+            }, () => { 
+            this.getLocationName();
+        });
+    }
 
+    showError(error) {
+        switch(error.code) {
+          case error.PERMISSION_DENIED:
+            alert("User denied the request for Geolocation.");
+            break;
+          case error.POSITION_UNAVAILABLE:
+            alert("Location information is unavailable.");
+            break;
+          case error.TIMEOUT:
+            alert("The request to get user location timed out.");
+            break;
+          case error.UNKNOWN_ERROR:
+            alert("An unknown error occurred.");
+            break;
+        }
+      }
 
     /**
      * Get the City/State of the location.
-     * Current location is hard coded to Vernon, California.
+     * Default location is hard coded to Spokane, WA.
      */
     getLocationName() {
-        // let coord = '34.052235,-118.243683'
-        let coord = '47.658779,-117.426048'
-        this.noaaEndpoint += coord
+        let url = this.noaaEndpoint + this.state.latitude + ',' + this.state.longitude
+        console.log(url)
 
-        fetch(this.noaaEndpoint).then(
+        fetch(url).then(
             (response) => {
                 return response.json()
             }
         ).then(
             (jsonObj) => {
+                console.log(jsonObj)
                 let city = jsonObj['properties']['relativeLocation']['properties']['city']
                 let state = jsonObj['properties']['relativeLocation']['properties']['state']
                 this.setState(
