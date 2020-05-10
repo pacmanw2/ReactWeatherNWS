@@ -1,4 +1,4 @@
-# Check the [wiki](https://github.com/pacmanw2/ReactWeatherNWS/wiki) for app demo
+# [App Demo](https://pacmanw2.github.io/ReactWeatherNWS/)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
